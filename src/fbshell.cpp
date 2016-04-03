@@ -432,6 +432,16 @@ void FbShell::updateCursor()
 		}
 		break;
 
+        case CurIBeam:
+                screen->fillRect(FW(mCursor.x + 1) - 1, FH(mCursor.y), 1, FH(1), mCursor.showed ? mCursor.attr.fcolor : mCursor.attr.bcolor);
+		if (mImProxy) {
+			Rectangle rect = { FW(mCursor.x), FH(mCursor.y + 1) - 1, FW(1), 1 };
+			mImProxy->redrawImWin(rect);
+		}
+		break;
+
+
+
 	default: {
 		bool dw = (mCursor.attr.type != CharAttr::Single);
 
