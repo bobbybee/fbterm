@@ -190,7 +190,7 @@ void Config::checkConfigFile(const s8 *name)
 		"# run 'iconv --list' to get available encodings.\n"
 		"text-encodings=\n"
 		"\n"
-		"# cursor shape: 0 = underline, 1 = block\n"
+		"# cursor shape: 0 = underline, 1 = block, 2 = I-beam\n"
 		"# cursor flash interval in milliseconds, 0 means disable flashing\n"
 		"cursor-shape=0\n"
 		"cursor-interval=500\n"
