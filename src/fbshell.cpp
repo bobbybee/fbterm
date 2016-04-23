@@ -413,8 +413,11 @@ void FbShell::updateCursor()
 			inited = true;
 			Config::instance()->getOption("cursor-shape", default_shape);
 
-			if (!default_shape) default_shape = CurUnderline;
-			else default_shape = CurBlock;
+                        default_shape = 
+                            default_shape == 0 ? CurUnderline :
+                            default_shape == 1 ? CurBlock :
+                            default_shape == 2 ? CurIBeam :
+                                                 CurUnderline;
 		}
 
 		shape = default_shape;
@@ -431,6 +434,16 @@ void FbShell::updateCursor()
 			mImProxy->redrawImWin(rect);
 		}
 		break;
+
+        case CurIBeam:
+                screen->fillRect(FW(mCursor.x), FH(mCursor.y), 1, FH(1), mCursor.showed ? mCursor.attr.fcolor : mCursor.attr.bcolor);
+		if (mImProxy) {
+			Rectangle rect = { FW(mCursor.x), FH(mCursor.y + 1) - 1, FW(1), 1 };
+			mImProxy->redrawImWin(rect);
+		}
+		break;
+
+
 
 	default: {
 		bool dw = (mCursor.attr.type != CharAttr::Single);
